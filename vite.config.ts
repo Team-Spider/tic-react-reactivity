@@ -8,12 +8,18 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["tictactoe.nik-server.in"],
+    allowedHosts: ["tictactoe.nik-server.in"],  // ✅ allow your domain
+    proxy: {
+      "/live": {
+        target: "http://192.168.1.101:5000",
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/live/, ""),
+      },
+    },
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
