@@ -5,17 +5,16 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "/live/", // ensures assets load under /live
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["tictactoe.nik-server.in"],
+    // Optional: proxy API requests to backend
     proxy: {
-      "/live": {
-        target: "https://tictactoe.nik-server.in", // HTTPS target
+      "/api": {
+        target: "https://tictactoe.nik-server.in",
         changeOrigin: true,
         secure: false, // allows self-signed certs in development
-        // rewrite optional if backend does not expect /live
-        // rewrite: (p) => p.replace(/^\/live/, ""),
       },
     },
   },
