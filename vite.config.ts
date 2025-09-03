@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["https://demo.tictactoe.nik-server.in"],
+    allowedHosts: ["demo.tictactoe.nik-server.in"],
   },
   plugins: [
     react(),
