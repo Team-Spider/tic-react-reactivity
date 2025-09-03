@@ -2,95 +2,276 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* TicTacToe Gaming Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Gaming Color Palette */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 240 10% 3.9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 263 70% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Gaming Specific Colors */
+    --neon-blue: 199 89% 48%;
+    --neon-purple: 263 70% 50%;
+    --neon-cyan: 180 100% 50%;
+    --neon-pink: 322 81% 60%;
+    --electric-green: 120 100% 50%;
+    --warning-orange: 38 92% 50%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* X and O Colors */
+    --player-x: 322 81% 60%;
+    --player-o: 180 100% 50%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-purple)), hsl(var(--neon-blue)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--electric-green)));
+    --gradient-danger: linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--warning-orange)));
+    --gradient-background: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(240 8% 8%));
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Glows and Shadows */
+    --glow-purple: 0 0 30px hsl(var(--neon-purple) / 0.5);
+    --glow-cyan: 0 0 30px hsl(var(--neon-cyan) / 0.5);
+    --glow-pink: 0 0 30px hsl(var(--player-x) / 0.5);
+    --glow-blue: 0 0 30px hsl(var(--player-o) / 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 240 10% 3.9%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 263 70% 50%;
+  }
+}
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    background: var(--gradient-background);
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    @apply rounded-full;
+  }
+}
+
+@layer components {
+  /* Gaming Button Variants */
+  .btn-gaming {
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-bold text-white transition-all duration-300;
+    background: var(--gradient-primary);
+    box-shadow: var(--glow-purple);
+    transform: translateY(0);
+  }
+
+  .btn-gaming:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-purple), 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-gaming:active {
+    transform: translateY(0);
+  }
+
+  .btn-gaming:disabled {
+    @apply opacity-50 cursor-not-allowed;
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-bold text-white transition-all duration-300;
+    background: var(--gradient-secondary);
+    box-shadow: var(--glow-cyan);
+    transform: translateY(0);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-cyan), 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-danger {
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-bold text-white transition-all duration-300;
+    background: var(--gradient-danger);
+    box-shadow: 0 0 30px hsl(var(--destructive) / 0.5);
+    transform: translateY(0);
+  }
+
+  .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px hsl(var(--destructive) / 0.5), 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Glass Card Effect */
+  .glass-card {
+    @apply backdrop-blur-xl border rounded-2xl p-6;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Game Board Styles */
+  .game-cell {
+    @apply relative h-20 w-20 md:h-24 md:w-24 flex items-center justify-center text-4xl md:text-6xl font-black cursor-pointer transition-all duration-200;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .game-cell:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: hsl(var(--neon-purple));
+    box-shadow: var(--glow-purple);
+    transform: scale(1.05);
+  }
+
+  .game-cell:disabled {
+    @apply cursor-not-allowed;
+  }
+
+  .game-cell.x-cell {
+    color: hsl(var(--player-x));
+    text-shadow: var(--glow-pink);
+  }
+
+  .game-cell.o-cell {
+    color: hsl(var(--player-o));
+    text-shadow: var(--glow-blue);
+  }
+
+  /* Status Pills */
+  .status-pill {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-bold backdrop-blur-xl border;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .status-pill.connected {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgb(16, 185, 129);
+    color: rgb(16, 185, 129);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+
+  .status-pill.connecting {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: rgb(245, 158, 11);
+    color: rgb(245, 158, 11);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+
+  .status-pill.disconnected {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgb(239, 68, 68);
+    color: rgb(239, 68, 68);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+
+  /* Animations */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    from {
+      box-shadow: var(--glow-purple);
+    }
+    to {
+      box-shadow: var(--glow-purple), var(--glow-cyan);
+    }
+  }
+
+  .game-winner {
+    animation: celebrate 0.6s ease-out;
+  }
+
+  @keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  /* Floating particles effect */
+  .particles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(1deg); }
+    66% { transform: translateY(-10px) rotate(-1deg); }
   }
 }
 
