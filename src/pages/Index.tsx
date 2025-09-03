@@ -462,6 +462,43 @@ const Index = () => {
               📜 Battle Chronicles
             </h2>
             
+            {/* Win/Loss Counter */}
+            {history.length > 0 && (() => {
+              let myWins = 0;
+              let opponentWins = 0;
+              let draws = 0;
+              
+              history.forEach(game => {
+                if (game.winner === "Draw") {
+                  draws++;
+                } else if (
+                  (game.x_player === playerId && game.winner === "X") ||
+                  (game.o_player === playerId && game.winner === "O")
+                ) {
+                  myWins++;
+                } else {
+                  opponentWins++;
+                }
+              });
+              
+              return (
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  <div className="text-center p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/30">
+                    <div className="text-2xl font-black text-emerald-400">{myWins}</div>
+                    <div className="text-xs text-emerald-300">Your Wins</div>
+                  </div>
+                  <div className="text-center p-3 rounded-xl bg-amber-500/20 border border-amber-400/30">
+                    <div className="text-2xl font-black text-amber-400">{draws}</div>
+                    <div className="text-xs text-amber-300">Draws</div>
+                  </div>
+                  <div className="text-center p-3 rounded-xl bg-red-500/20 border border-red-400/30">
+                    <div className="text-2xl font-black text-red-400">{opponentWins}</div>
+                    <div className="text-xs text-red-300">Their Wins</div>
+                  </div>
+                </div>
+              );
+            })()}
+            
             {history.length === 0 ? (
               <div className="text-center py-8 text-foreground/50">
                 <div className="text-4xl mb-2">⚔️</div>
