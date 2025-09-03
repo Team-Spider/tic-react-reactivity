@@ -9,12 +9,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    // Optional: proxy API requests to backend
+    allowedHosts: ["tictactoe.nik-server.in"], // allow access via your domain
     proxy: {
       "/api": {
         target: "https://tictactoe.nik-server.in",
         changeOrigin: true,
-        secure: false, // allows self-signed certs in development
+        secure: false, // allows self-signed certs
       },
     },
   },
