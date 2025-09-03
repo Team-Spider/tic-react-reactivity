@@ -8,12 +8,14 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["tictactoe.nik-server.in"],  // ✅ allow your domain
+    allowedHosts: ["tictactoe.nik-server.in"],
     proxy: {
       "/live": {
-        target: "http://192.168.1.101:5000",
+        target: "https://tictactoe.nik-server.in", // HTTPS target
         changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/live/, ""),
+        secure: false, // allows self-signed certs in development
+        // rewrite optional if backend does not expect /live
+        // rewrite: (p) => p.replace(/^\/live/, ""),
       },
     },
   },
