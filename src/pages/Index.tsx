@@ -418,8 +418,8 @@ const Index = () => {
             <div className="flex flex-wrap gap-3 justify-center">
               <StatusPill>🏠 {roomCode}</StatusPill>
               <StatusPill>🎯 Turn: {turn}</StatusPill>
-              <StatusPill>❌ X: {xPlayer || "Waiting..."}</StatusPill>
-              <StatusPill>⭕ O: {oPlayer || "Waiting..."}</StatusPill>
+              <StatusPill>❌ X: {xPlayer === playerId ? "You" : (xPlayer ? "Opponent" : "Waiting...")}</StatusPill>
+              <StatusPill>⭕ O: {oPlayer === playerId ? "You" : (oPlayer ? "Opponent" : "Waiting...")}</StatusPill>
               <StatusPill variant={connectionStatus}>
                 {connected ? "🟢 Live" : connecting ? "🟡 Connecting..." : "🔴 Offline"}
               </StatusPill>
@@ -510,7 +510,7 @@ const Index = () => {
                   <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-sm text-cyan-400 font-bold">Battle #{idx + 1}</div>
                     <div className="text-xs text-foreground/60 mb-2">
-                      ❌ {g.x_player} vs ⭕ {g.o_player}
+                      ❌ {g.x_player === playerId ? "You" : "Opponent"} vs ⭕ {g.o_player === playerId ? "You" : "Opponent"}
                     </div>
                     <div className="font-bold">
                       {g.winner === "Draw" ? "🤝 Draw" : `🏆 ${g.winner} Victory`}
