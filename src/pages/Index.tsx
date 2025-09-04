@@ -1,4 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import HomeIcon from '@mui/icons-material/Home';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // ==== CONFIG =====
 const BASE_URL = "https://tictactoe.nik-server.in";
@@ -416,10 +420,10 @@ const Index = () => {
           {/* Game Board Section */}
           <div className="lg:col-span-2 glass-card space-y-6">
             <div className="flex flex-wrap gap-3 justify-center">
-              <StatusPill>🏠 {roomCode}</StatusPill>
-              <StatusPill>🎯 Turn: {turn}</StatusPill>
-              <StatusPill>❌ X: {xPlayer || "Waiting..."}</StatusPill>
-              <StatusPill>⭕ O: {oPlayer || "Waiting..."}</StatusPill>
+              <StatusPill><HomeIcon sx={{ fontSize: 16, marginRight: 0.5 }} />{roomCode}</StatusPill>
+              <StatusPill><SportsEsportsIcon sx={{ fontSize: 16, marginRight: 0.5 }} />Turn: {turn}</StatusPill>
+              <StatusPill>❌ X: {xPlayer ? (xPlayer === playerId ? "You" : "Opponent") : "Waiting..."}</StatusPill>
+              <StatusPill>⭕ O: {oPlayer ? (oPlayer === playerId ? "You" : "Opponent") : "Waiting..."}</StatusPill>
               <StatusPill variant={connectionStatus}>
                 {connected ? "🟢 Live" : connecting ? "🟡 Connecting..." : "🔴 Offline"}
               </StatusPill>
@@ -509,12 +513,20 @@ const Index = () => {
                 {history.map((g, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-sm text-cyan-400 font-bold">Battle #{idx + 1}</div>
-                    <div className="text-xs text-foreground/60 mb-2">
-                      ❌ {g.x_player} vs ⭕ {g.o_player}
-                    </div>
-                    <div className="font-bold">
-                      {g.winner === "Draw" ? "🤝 Draw" : `🏆 ${g.winner} Victory`}
-                    </div>
+                     <div className="text-xs text-foreground/60 mb-2">
+                       ❌ {g.x_player === playerId ? "You" : "Opponent"} vs ⭕ {g.o_player === playerId ? "You" : "Opponent"}
+                     </div>
+                     <div className="font-bold flex items-center gap-1">
+                        {g.winner === "Draw" ? (
+                          <><RemoveIcon sx={{ fontSize: 16 }} /> Draw</>
+                        ) : (
+                          <><EmojiEventsIcon sx={{ fontSize: 16 }} /> {
+                            (g.winner === "X" && g.x_player === playerId) || (g.winner === "O" && g.o_player === playerId) 
+                              ? "You won!" 
+                              : "Opponent won"
+                          }</>
+                        )}
+                     </div>
                   </div>
                 ))}
               </div>
