@@ -417,9 +417,13 @@ const Index = () => {
           <div className="lg:col-span-2 glass-card space-y-6">
             <div className="flex flex-wrap gap-3 justify-center">
               <StatusPill>🏠 {roomCode}</StatusPill>
-              <StatusPill>🎯 Turn: {turn}</StatusPill>
-              <StatusPill>❌ X: {xPlayer === playerId ? "You" : (xPlayer ? "Opponent" : "Waiting...")}</StatusPill>
-              <StatusPill>⭕ O: {oPlayer === playerId ? "You" : (oPlayer ? "Opponent" : "Waiting...")}</StatusPill>
+              <StatusPill>🎯 Turn: {
+                turn === "X" 
+                  ? (xPlayer === playerId ? "You" : "Opponent")
+                  : (oPlayer === playerId ? "You" : "Opponent")
+              }</StatusPill>
+              <StatusPill>❌ {xPlayer === playerId ? "You" : (xPlayer ? "Opponent" : "Waiting...")}</StatusPill>
+              <StatusPill>⭕ {oPlayer === playerId ? "You" : (oPlayer ? "Opponent" : "Waiting...")}</StatusPill>
               <StatusPill variant={connectionStatus}>
                 {connected ? "🟢 Live" : connecting ? "🟡 Connecting..." : "🔴 Offline"}
               </StatusPill>
