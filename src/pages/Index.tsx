@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Copy } from "lucide-react";
 
 // ==== CONFIG =====
 const BASE_URL = "https://tictactoe.nik-server.in";
@@ -401,7 +402,20 @@ const Index = () => {
     <div className="relative particles min-h-screen p-4 md:p-8">
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl md:text-4xl font-black text-white">⚔️ Battle Arena</h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-3xl md:text-4xl font-black text-white">⚔️ Battle Arena</h1>
+            <div className="flex items-center gap-2 glass-card px-3 py-1">
+              <span className="text-foreground/70">#</span>
+              <span className="font-mono text-cyan-400">{roomCode}</span>
+              <button 
+                onClick={() => copyToClipboard(roomCode)}
+                className="text-foreground/50 hover:text-foreground transition-colors p-1"
+                title="Copy room code"
+              >
+                <Copy size={16} />
+              </button>
+            </div>
+          </div>
           <div className="flex items-center gap-4">
             <button onClick={() => setView("lobby")} className="text-cyan-400 hover:text-cyan-300 transition-colors">
               ← Lobby
@@ -415,18 +429,20 @@ const Index = () => {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Game Board Section */}
           <div className="lg:col-span-2 glass-card space-y-6">
-            <div className="flex flex-wrap gap-3 justify-center">
-              <StatusPill>🏠 {roomCode}</StatusPill>
-              <StatusPill>🎯 Turn: {
-                turn === "X" 
-                  ? (xPlayer === playerId ? "You" : "Opponent")
-                  : (oPlayer === playerId ? "You" : "Opponent")
-              }</StatusPill>
-              <StatusPill>❌ {xPlayer === playerId ? "You" : (xPlayer ? "Opponent" : "Waiting...")}</StatusPill>
-              <StatusPill>⭕ {oPlayer === playerId ? "You" : (oPlayer ? "Opponent" : "Waiting...")}</StatusPill>
-              <StatusPill variant={connectionStatus}>
-                {connected ? "🟢 Live" : connecting ? "🟡 Connecting..." : "🔴 Offline"}
-              </StatusPill>
+            <div className="text-center">
+              <div className="text-lg font-bold text-white mb-3">
+                {turn === "X" 
+                  ? (xPlayer === playerId ? "Your turn" : "Opponent's turn")
+                  : (oPlayer === playerId ? "Your turn" : "Opponent's turn")
+                }
+              </div>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <StatusPill>❌ {xPlayer === playerId ? "You" : (xPlayer ? "Opponent" : "Waiting...")}</StatusPill>
+                <StatusPill>⭕ {oPlayer === playerId ? "You" : (oPlayer ? "Opponent" : "Waiting...")}</StatusPill>
+                <StatusPill variant={connectionStatus}>
+                  {connected ? "🟢 Live" : connecting ? "🟡 Connecting..." : "🔴 Offline"}
+                </StatusPill>
+              </div>
             </div>
 
             <div className="flex items-center justify-center">
